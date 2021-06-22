@@ -54,7 +54,8 @@
             android:layout_height="@dimen/fingerprint_icon_size"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="32dp"
-            android:scaleType="fitXY" />
+            android:scaleType="fitXY"
+            android:contentDescription="TODO" />
 
         <TextView
             android:id="@+id/fingerprint_error"

@@ -15,11 +15,9 @@
   ~ limitations under the License.
    -->
 
-<resources xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="fingerprint_dialog_touch_sensor" msgid="5354590751262189738">"Αγγίξτε τον αισθ. δακτ. αποτ."</string>
     <string name="fingerprint_not_recognized" msgid="5491287833813257925">"Δεν αναγνωρίστηκε"</string>
-    <string name="accessibility_fingerprint_dialog_help_area" msgid="6241458715391513061">"Περιοχή μηνυμάτων βοήθειας"</string>
     <string name="fingerprint_error_hw_not_available" msgid="3976825677335166260">"Ο εξοπλισμός δακτυλικού αποτυπώματος δεν είναι διαθέσιμος."</string>
     <string name="fingerprint_error_no_fingerprints" msgid="3350805046152877040">"Δεν έχουν καταχωριστεί δακτυλικά αποτυπώματα."</string>
     <string name="fingerprint_error_hw_not_present" msgid="1176237289575184578">"Αυτή η συσκευή δεν διαθέτει αισθητήρα δακτυλικών αποτυπωμάτων"</string>

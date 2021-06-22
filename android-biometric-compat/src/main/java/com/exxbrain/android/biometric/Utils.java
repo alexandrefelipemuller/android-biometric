@@ -118,7 +118,6 @@ class Utils {
             subtitle = null;
         }
 
-        @SuppressWarnings("deprecation")
         final Intent intent = keyguardManager.createConfirmDeviceCredentialIntent(title, subtitle);
         if (intent == null) {
             Log.e(loggingTag, "Failed to check device credential. Got null intent from Keyguard.");
@@ -159,19 +158,16 @@ class Utils {
      * BiometricPrompt.CryptoObject)} is called.
      *
      * @param context The application or activity context.
-     * @param vendor Name of the device vendor/manufacturer.
-     * @param model Model name of the current device.
      * @return true if the current device should fall back to fingerprint for crypto-based
      * authentication, or false otherwise.
      */
-    static boolean shouldUseFingerprintForCrypto(@NonNull Context context, String vendor,
-            String model) {
+    static boolean shouldUseFingerprintForCrypto(@NonNull Context context) {
         if (Build.VERSION.SDK_INT != Build.VERSION_CODES.P) {
             // This workaround is only needed for API 28.
             return false;
         }
-        return isVendorInList(context, vendor, R.array.crypto_fingerprint_fallback_vendors)
-            || isModelInPrefixList(context, model, R.array.crypto_fingerprint_fallback_prefixes);
+        return isVendorInList(context, Build.MANUFACTURER, R.array.crypto_fingerprint_fallback_vendors)
+            || isModelInPrefixList(context, Build.MODEL, R.array.crypto_fingerprint_fallback_prefixes);
     }
 
     /**
@@ -180,16 +176,15 @@ class Utils {
      * shown behind an overlay that sends a cancel signal when it is dismissed).
      *
      * @param context The application or activity context.
-     * @param model Model name of the current device.
      * @return true if {@link FingerprintDialogFragment} should always be dismissed immediately, or
      * false otherwise.
      */
-    static boolean shouldHideFingerprintDialog(@NonNull Context context, String model) {
+    static boolean shouldHideFingerprintDialog(@NonNull Context context) {
         if (Build.VERSION.SDK_INT != Build.VERSION_CODES.P) {
             // This workaround is only needed for API 28.
             return false;
         }
-        return isModelInPrefixList(context, model, R.array.hide_fingerprint_instantly_prefixes);
+        return isModelInPrefixList(context, Build.MODEL, R.array.hide_fingerprint_instantly_prefixes);
     }
 
     /**

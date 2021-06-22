@@ -18,14 +18,13 @@ import java.util.concurrent.Executor;
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "MainActivity";
-    private Button button;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        button = findViewById(R.id.btn_authenticate);
+        Button button = findViewById(R.id.btn_authenticate);
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override

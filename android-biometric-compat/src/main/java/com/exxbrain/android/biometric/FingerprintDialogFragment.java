@@ -43,6 +43,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.Objects;
+
 /**
  * This class implements a custom AlertDialog that prompts the user for fingerprint authentication.
  * This class is not meant to be preserved across process death; for security reasons, the
@@ -60,7 +62,7 @@ public class FingerprintDialogFragment extends DialogFragment {
 
     /**
      * Error/help message will show for this amount of time, unless
-     * {@link Utils#shouldAlwaysHideFingerprintDialogInstantly(String)} is true.
+     *  is true.
      *
      * <p>For error messages, the dialog will also be dismissed after this amount of time. Error
      * messages will be propagated back to the application via AuthenticationCallback
@@ -92,8 +94,7 @@ public class FingerprintDialogFragment extends DialogFragment {
      * Creates a dialog requesting for Fingerprint authentication.
      */
     static FingerprintDialogFragment newInstance() {
-        FingerprintDialogFragment fragment = new FingerprintDialogFragment();
-        return fragment;
+        return new FingerprintDialogFragment();
     }
 
     final class H extends Handler {
@@ -119,13 +120,13 @@ public class FingerprintDialogFragment extends DialogFragment {
                     final Context context = getContext();
                     mDismissInstantly =
                             context != null && Utils.shouldHideFingerprintDialog(
-                                    context, Build.MODEL);
+                                    context);
                     break;
             }
         }
     }
 
-    private H mHandler = new H();
+    private final H mHandler = new H();
     private Bundle mBundle;
     private int mErrorColor;
     private int mTextColor;
@@ -179,7 +180,7 @@ public class FingerprintDialogFragment extends DialogFragment {
             mBundle = savedInstanceState.getBundle(KEY_DIALOG_BUNDLE);
         }
 
-        final AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        final AlertDialog.Builder builder = new AlertDialog.Builder(Objects.requireNonNull(getContext()));
         builder.setTitle(mBundle.getCharSequence(BiometricPrompt.KEY_TITLE));
 
         // We have to use builder.getContext() instead of the usual getContext() in order to get
@@ -248,7 +249,7 @@ public class FingerprintDialogFragment extends DialogFragment {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             mErrorColor = getThemedColorFor(android.R.attr.colorError);
         } else {
-            mErrorColor = ContextCompat.getColor(mContext, R.color.biometric_error_color);
+            mErrorColor = ContextCompat.getColor(Objects.requireNonNull(mContext), R.color.biometric_error_color);
         }
         mTextColor = getThemedColorFor(android.R.attr.textColorSecondary);
     }
@@ -270,6 +271,7 @@ public class FingerprintDialogFragment extends DialogFragment {
     @Override
     public void onCancel(@NonNull DialogInterface dialog) {
         super.onCancel(dialog);
+        assert getFragmentManager() != null;
         final FingerprintHelperFragment fingerprintHelperFragment = (FingerprintHelperFragment)
                 getFragmentManager()
                         .findFragmentByTag(BiometricPrompt.FINGERPRINT_HELPER_FRAGMENT_TAG);
@@ -286,7 +288,7 @@ public class FingerprintDialogFragment extends DialogFragment {
         TypedValue tv = new TypedValue();
         Resources.Theme theme = mContext.getTheme();
         theme.resolveAttribute(attr, tv, true /* resolveRefs */);
-        TypedArray arr = getActivity().obtainStyledAttributes(tv.data, new int[] {attr});
+        TypedArray arr = Objects.requireNonNull(getActivity()).obtainStyledAttributes(tv.data, new int[] {attr});
 
         final int color = arr.getColor(0 /* index */, 0 /* defValue */);
         arr.recycle();
@@ -326,11 +328,11 @@ public class FingerprintDialogFragment extends DialogFragment {
 
     /**
      * @return The effective millisecond delay to wait before hiding the dialog, while respecting
-     * the result of {@link Utils#shouldAlwaysHideFingerprintDialogInstantly(String)}.
+     * the result of .
      */
     static int getHideDialogDelay(Context context) {
         return context != null && Utils.shouldHideFingerprintDialog(
-                context, Build.MODEL) ? 0 : MESSAGE_DISPLAY_TIME_MS;
+                context) ? 0 : MESSAGE_DISPLAY_TIME_MS;
     }
 
     private boolean isDeviceCredentialAllowed() {

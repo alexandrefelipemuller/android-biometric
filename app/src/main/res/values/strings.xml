@@ -1,3 +1,3 @@
 <resources>
-    <string name="app_name">android-biometric</string>
+    <string name="app_name" translatable="false">android-biometric</string>
 </resources>

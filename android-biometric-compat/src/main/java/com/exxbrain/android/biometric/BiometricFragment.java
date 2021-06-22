@@ -74,7 +74,6 @@ public class BiometricFragment extends Fragment {
 
     // Created once and retained.
     private boolean mShowing;
-    private android.hardware.biometrics.BiometricPrompt mBiometricPrompt;
     private CancellationSignal mCancellationSignal;
     private boolean mStartRespectingCancel;
 
@@ -301,7 +300,7 @@ public class BiometricFragment extends Fragment {
                 }, 250 /* ms */);
             }
 
-            mBiometricPrompt = builder.build();
+            android.hardware.biometrics.BiometricPrompt mBiometricPrompt = builder.build();
             mCancellationSignal = new CancellationSignal();
             if (mCryptoObject == null) {
                 mBiometricPrompt.authenticate(mCancellationSignal, mExecutor,

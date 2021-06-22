@@ -364,7 +364,7 @@ public class BiometricPrompt implements BiometricConstants {
             }
         }
 
-        private Bundle mBundle;
+        private final Bundle mBundle;
 
         PromptInfo(Bundle bundle) {
             mBundle = bundle;
@@ -570,15 +570,15 @@ public class BiometricPrompt implements BiometricConstants {
      * the {@link BiometricPrompt} can be used to update the {@link Executor} and
      * {@link AuthenticationCallback}. This should be used to update the
      * {@link AuthenticationCallback} after configuration changes.
-     * such as {@link FragmentActivity#onCreate(Bundle)}.
+     * such as .
      *
      * @param fragmentActivity A reference to the client's activity.
      * @param executor         An executor to handle callback events.
      * @param callback         An object to receive authentication events.
      */
     @SuppressLint("LambdaLast")
-    public BiometricPrompt(@NonNull FragmentActivity fragmentActivity,
-            @NonNull Executor executor, @NonNull AuthenticationCallback callback) {
+    public BiometricPrompt(FragmentActivity fragmentActivity,
+            Executor executor, AuthenticationCallback callback) {
         if (fragmentActivity == null) {
             throw new IllegalArgumentException("FragmentActivity must not be null");
         }
@@ -611,8 +611,8 @@ public class BiometricPrompt implements BiometricConstants {
      * @param callback An object to receive authentication events.
      */
     @SuppressLint("LambdaLast")
-    public BiometricPrompt(@NonNull Fragment fragment,
-            @NonNull Executor executor, @NonNull AuthenticationCallback callback) {
+    public BiometricPrompt(Fragment fragment,
+            Executor executor, AuthenticationCallback callback) {
         if (fragment == null) {
             throw new IllegalArgumentException("FragmentActivity must not be null");
         }
@@ -637,7 +637,7 @@ public class BiometricPrompt implements BiometricConstants {
      *               {@link BiometricPrompt.PromptInfo.Builder}.
      * @param crypto The crypto object associated with the authentication.
      */
-    public void authenticate(@NonNull PromptInfo info, @NonNull CryptoObject crypto) {
+    public void authenticate(PromptInfo info, CryptoObject crypto) {
         if (info == null) {
             throw new IllegalArgumentException("PromptInfo can not be null");
         } else if (crypto == null) {
@@ -655,7 +655,7 @@ public class BiometricPrompt implements BiometricConstants {
      * @param info The information that will be displayed on the prompt. Create this object using
      *             {@link BiometricPrompt.PromptInfo.Builder}.
      */
-    public void authenticate(@NonNull PromptInfo info) {
+    public void authenticate(PromptInfo info) {
         if (info == null) {
             throw new IllegalArgumentException("PromptInfo can not be null");
         }
@@ -710,7 +710,7 @@ public class BiometricPrompt implements BiometricConstants {
         // Force some devices to fall back to fingerprint in order to support strong (crypto) auth.
         final boolean shouldForceFingerprint = DEBUG_FORCE_FINGERPRINT
                 || (activity != null && crypto != null && Utils.shouldUseFingerprintForCrypto(
-                        activity, Build.MANUFACTURER, Build.MODEL));
+                        activity));
 
         if (!shouldForceFingerprint && canUseBiometricFragment()) {
             BiometricFragment biometricFragment =
@@ -751,7 +751,7 @@ public class BiometricPrompt implements BiometricConstants {
             mFingerprintDialogFragment.setNegativeButtonListener(mNegativeButtonListener);
             mFingerprintDialogFragment.setBundle(bundle);
 
-            if (activity != null && !Utils.shouldHideFingerprintDialog(activity, Build.MODEL)) {
+            if (activity != null && !Utils.shouldHideFingerprintDialog(activity)) {
                 if (fingerprintDialogFragment == null) {
                     mFingerprintDialogFragment.show(fragmentManager, DIALOG_FRAGMENT_TAG);
                 } else if (mFingerprintDialogFragment.isDetached()) {

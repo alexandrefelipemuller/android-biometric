@@ -71,13 +71,13 @@ public class FingerprintHelperFragment extends Fragment {
         }
 
         @VisibleForTesting
-        void sendMessage(int what, Object obj) {
-            mHandler.obtainMessage(what, obj).sendToTarget();
+        void sendMessage(Object obj) {
+            mHandler.obtainMessage(FingerprintDialogFragment.MSG_SHOW_HELP, obj).sendToTarget();
         }
 
         @VisibleForTesting
-        void sendMessage(int what, int arg1, int arg2, Object obj) {
-            mHandler.obtainMessage(what, arg1, arg2, obj).sendToTarget();
+        void sendMessage(int what, int arg1, Object obj) {
+            mHandler.obtainMessage(what, arg1, 0, obj).sendToTarget();
         }
     }
 
@@ -155,7 +155,7 @@ public class FingerprintHelperFragment extends Fragment {
                                 ? BiometricPrompt.ERROR_VENDOR : errMsgId;
 
                         mMessageRouter.sendMessage(FingerprintDialogFragment.MSG_SHOW_ERROR,
-                                dialogErrMsgId, 0, dialogErrString);
+                                dialogErrMsgId, dialogErrString);
                         mHandler.postDelayed(
                                 new Runnable() {
                                     @Override
@@ -172,7 +172,7 @@ public class FingerprintHelperFragment extends Fragment {
                 @Override
                 public void onAuthenticationHelp(final int helpMsgId,
                         final CharSequence helpString) {
-                    mMessageRouter.sendMessage(FingerprintDialogFragment.MSG_SHOW_HELP, helpString);
+                    mMessageRouter.sendMessage(helpString);
                     // Don't forward the result to the client, since the dialog takes care of it.
                 }
 
@@ -202,7 +202,7 @@ public class FingerprintHelperFragment extends Fragment {
 
                 @Override
                 public void onAuthenticationFailed() {
-                    mMessageRouter.sendMessage(FingerprintDialogFragment.MSG_SHOW_HELP,
+                    mMessageRouter.sendMessage(
                             mContext.getResources().getString(R.string.fingerprint_not_recognized));
                     mExecutor.execute(new Runnable() {
                         @Override

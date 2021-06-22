@@ -15,11 +15,9 @@
   ~ limitations under the License.
    -->
 
-<resources xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="fingerprint_dialog_touch_sensor" msgid="5354590751262189738">"వేలిముద్ర సెన్సార్‌ను తాకండి"</string>
     <string name="fingerprint_not_recognized" msgid="5491287833813257925">"గుర్తించబడలేదు"</string>
-    <string name="accessibility_fingerprint_dialog_help_area" msgid="6241458715391513061">"సహాయ సందేశ ప్రాంతం"</string>
     <string name="fingerprint_error_hw_not_available" msgid="3976825677335166260">"వేలిముద్ర హార్డ్‌వేర్ అందుబాటులో లేదు."</string>
     <string name="fingerprint_error_no_fingerprints" msgid="3350805046152877040">"వేలిముద్రలు నమోదు చేయబడలేదు."</string>
     <string name="fingerprint_error_hw_not_present" msgid="1176237289575184578">"ఈ పరికరంలో వేలిముద్ర సెన్సార్ లేదు"</string>

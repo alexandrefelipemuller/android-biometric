@@ -4,9 +4,6 @@ import android.support.test.runner.AndroidJUnit4;
 
 import org.junit.runner.RunWith;
 
-import static android.support.test.espresso.Espresso.onView;
-import static android.support.test.espresso.matcher.ViewMatchers.withText;
-
 /**
  * Instrumented test, which will execute on an Android device.
  *
