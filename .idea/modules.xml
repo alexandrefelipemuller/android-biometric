@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/android-biometric.iml" filepath="$PROJECT_DIR$/.idea/android-biometric.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/android-biometric-compat/android-biometric.android-biometric-compat.iml" filepath="$PROJECT_DIR$/.idea/modules/android-biometric-compat/android-biometric.android-biometric-compat.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/android-biometric.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/android-biometric.app.iml" />
+    </modules>
+  </component>
+</project>

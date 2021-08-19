@@ -16,7 +16,7 @@
 
 package com.exxbrain.android.biometric;
 
-import android.support.annotation.RestrictTo;
+import androidx.annotation.RestrictTo;
 
 /**
  * Interface containing all of the biometric modality agnostic constants. These constants must
